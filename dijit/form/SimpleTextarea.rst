@@ -41,13 +41,14 @@ The *value* attribute can be set with the widget's set('value', text) method.
             rows: "4",
             cols: "50",
             style: "width:auto;"
-        }, "myarea").startup();
+        }, "myarea");
+        textarea.startup();
         textarea.set("value", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.");
     });
 
   .. html ::
 
-    <textarea id="myarea" />
+    <textarea id="myarea">
 
 Declarative example
 -------------------
@@ -64,4 +65,4 @@ In this instance, the initial *value* is the child text node of the textarea ele
 
   .. html ::
 
-    <textarea id="textarea2" name="textarea2" data-dojo-type="dijit/form/SimpleTextarea" rows="4" cols="50" style="width:auto;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    <textarea id="textarea2" name="textarea2" data-dojo-type="dijit/form/SimpleTextarea" rows="4" cols="50" style="width:auto;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</textarea>

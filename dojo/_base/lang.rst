@@ -9,7 +9,8 @@ dojo/_base/lang
 .. contents ::
     :depth: 2
 
-**dojo/_base/lang** contains functions for supporting Polymorphism and other language constructs that are fundemental to the rest of the toolkit.
+**dojo/_base/lang** contains functions for supporting Polymorphism and other language constructs that are
+fundamental to the rest of the toolkit.
 
 Usage
 =====
@@ -45,14 +46,6 @@ version of that *something* will be made:
     // clone an array
     var newarray = lang.clone(["a", "b", "c"]);
   });
-
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: clone
-  :no-headers:
-  :sig:
-  :returns:
 
 Usage
 ~~~~~
@@ -100,12 +93,12 @@ concerns.
 delegate()
 ----------
 
-Returns a new object which "looks" to the passed object for properties which it does not have a value for, or takes a 
+Returns a new object which "looks" at the passed object for properties which it does not have a value for, or takes a 
 set of properties to seed the returned object with initially.
 
-This is a subset of implementation of the Boodman/Crockford delegation pattern in JavaScript. An intermediate object 
+This implementation is a subset of the Boodman/Crockford delegation pattern in JavaScript. An intermediate object 
 constructor mediates the prototype chain for the returned object, using it to delegate down to the supplied object for 
-property lookup when object-local lookup fails. This can be thought of similarly to ES4's ``wrap()``, save that it 
+property lookup when object-local lookup fails. This can be thought of similarly to ES4's ``wrap()``, except that it 
 does not act on types but rather on pure objects.
 
 .. js ::
@@ -177,13 +170,6 @@ can use it to root the path in a different window object, or a particular namesp
     }
   });
 
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: exists
-  :no-headers:
-  :sig:
-  :returns:
 
 .. _dojo/_base/lang#extend:
 
@@ -203,29 +189,23 @@ This can be used to extend functionality into existing classes. Consider the fol
     });
   });
 
-The way the :ref:`dojo/parser <dojo/parser>` works, a custom attribute on the node will be recognized, as in the 
-interest of performance, only declared members are mixed as part of the parsing process. Before the above ``extend()``
-call, this sample would not recognize the follow markup:
+The :ref:`dojo/parser <dojo/parser>` scans for custom attributes on a refernce DOM node. In the 
+interest of performance, only declared members of the widget's JavaScript are mixed into the widget
+constructor as part of the parsing process. Without the above ``extend()`` call, this sample would not
+copy the ``randomAttribute`` property from the following markup:
 
 .. html ::
 
   <div data-dojo-type="dijit/TitlePane" data-dojo-props="randomAttribute:'newValue'"></div>
 
-After the extend, any new instances of a ``dijit/TitlePane`` will have the ``randomAttribute`` member mixed into the 
+After the extend, any new instances of a ``dijit/TitlePane`` will have the ``randomAttribute`` property mixed into the 
 instance. ``extend()`` affects all future instances of a class or prototyped Object.
 
-The signature of the function is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: extend
-  :no-headers:
-  :sig:
-  :returns:
 
 Extending dijit/_WidgetBase
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A potentially confusing result of the above actually provides us a lot of flexibility. All Dijit widgets inherit from 
+A potentially confusing result of the previous example actually provides us a lot of flexibility. All Dijit widgets inherit from 
 :ref:`dijit/_WidgetBase <dijit/_WidgetBase>` in one way or another. Some widgets, like the 
 :ref:`dijit/layout/BorderContainer <dijit/layout/BorderContainer>` can contain arbitrary widgets, though require a 
 ``region`` parameter on the contained widget, though rather than manually adding a ``region`` parameter to each 
@@ -240,7 +220,7 @@ any widget within a BorderContainer can specify a ``region``:
     });
   });
 
-The side-effect of this is a documentation nightmare. Now *every* widget appears to have a region variable, when in 
+The side-effect of this is a documentation headache. Now *every* widget appears to have a region variable, when in 
 fact it is just there for the benefit of BorderContainer.  As a side note, this has been addressed in the API Viewer 
 and other documentation as "extension" properties, methods and events and can be easily identified and filtered out.
 
@@ -323,14 +303,6 @@ By default, the context is :ref:`dojo/_base/kernel::global <dojo/_base/kernel#gl
     lang.getObject("bar", false, foo); // returns "some value"
   });
 
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: getObject
-  :no-headers:
-  :sig:
-  :returns:
-
 .. _dojo/_base/lang#hitch:
 
 hitch()
@@ -365,14 +337,6 @@ Only to have it fail with a cryptic error about an unresolved variable? Why does
   });
 
 And now when the event fires and runs the function, ``this`` will refer to the context that is expected.
-
-The signature of the the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: hitch
-  :no-headers:
-  :sig:
-  :returns:
 
 Examples
 ~~~~~~~~
@@ -454,13 +418,7 @@ mixin()
 overwriting the left-most object, and returning the newly mixed object for use. ``mixin()`` is very similar to 
 `extend()`_ but only works on objects, whereas extend explicitly extends an object's prototype.
 
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: mixin
-  :no-headers:
-  :sig:
-  :returns:
+Note: In case of nested objects and arrays, mixin does not combine, only overwrite.
 
 Simple Mixes
 ~~~~~~~~~~~~
@@ -603,13 +561,6 @@ What that does is create a new function that wraps dataLoaded and affixes the fi
 ``firstValue``.  Note that ``partial()`` allows you to do *n* parameters, so you can keep defining as many values as 
 you want for fixed-value parameters of a function.
 
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: partial
-  :no-headers:
-  :sig:
-
 Example
 ~~~~~~~
 
@@ -642,15 +593,6 @@ replace()
 
 This function provides a light-weight foundation for substitution-based templating. It is a sane alternative to string 
 concatenation technique, which is brittle and doesn't play nice with localization.
-
-The signature of the method is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: replace
-  :no-headers:
-  :sig:
-
-The method returns a ``String``.
 
 With Dictionary
 ~~~~~~~~~~~~~~~
@@ -927,20 +869,13 @@ Without ``setObject()``, it is often handle like this:
   // now we can safely set the property
   obj.parent.child.prop = "some value";
 
-Wheras with `setObject()`, we can shorten that to:
+Whereas with `setObject()`, we can shorten that to:
 
 .. js ::
 
   require(["dojo/_base/lang"], function(lang){
     lang.setObject("parent.child.prop", "some value", obj);
   });
-
-The signature of the function is:
-
-.. api-doc :: dojo/_base/lang
-  :methods: setObject
-  :no-headers:
-  :sig:
 
 .. _dojo/_base/lang#trim:
 
@@ -977,13 +912,6 @@ more speed, check out :ref:`dojo/string::trim() <dojo/string#trim>`, which imple
     <p id="output3"></p>
     <p id="output4"></p>
     <p id="output5"></p>
-
-The method has the following signature:
-
-.. api-doc :: dojo/_base/lang
-  :methods: trim
-  :no-headers:
-  :sig:
 
 Deprecated Methods
 ==================

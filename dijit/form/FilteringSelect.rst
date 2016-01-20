@@ -1,7 +1,7 @@
 .. _dijit/form/FilteringSelect:
 
 ==========================
-dijit.form.FilteringSelect
+dijit/form/FilteringSelect
 ==========================
 
 :Authors: Doug Hays, Nikolai Onken
@@ -50,8 +50,9 @@ To get the text currently displayed in the textbox (the value of the currently s
   .. js ::
 
         require([
-            "dojo/store/Memory", "dijit/form/FilteringSelect", "dojo/domReady!"
-        ], function(Memory, FilteringSelect){
+            "dojo/store/Memory", "dijit/form/FilteringSelect",
+            "dijit/registry", "dojo/domReady!"
+        ], function(Memory, FilteringSelect, registry){
             var stateStore = new Memory({
                 data: [
                     {name:"Alabama", id:"AL"},
@@ -75,15 +76,16 @@ To get the text currently displayed in the textbox (the value of the currently s
                 value: "CA",
                 store: stateStore,
                 searchAttr: "name"
-            }, "stateSelect").startup();
+            }, "stateSelect");
+            filteringSelect.startup();
         });
 
   .. html ::
 
     <input id="stateSelect">
     <p>
-        <button onclick="alert(dijit.byId('stateSelect').get('value'))">Get value</button>
-        <button onclick="alert(dijit.byId('stateSelect').get('displayedValue'))">Get displayed value</button>
+        <button onclick="alert(registry.byId('stateSelect').get('value'))">Get value</button>
+        <button onclick="alert(registry.byId('stateSelect').get('displayedValue'))">Get displayed value</button>
     </p>
 
 Declarative markup using native select and option tags
@@ -102,7 +104,7 @@ If you want the FilteringSelect to start blank, use a different method to create
 
   .. js ::
 
-    require(["dojo/parser", "dijit/form/FilteringSelect"]);
+    require(["dojo/parser", "dijit/form/FilteringSelect", "dojo/domReady!"]);
 
   .. html ::
 
@@ -113,7 +115,7 @@ If you want the FilteringSelect to start blank, use a different method to create
     </select>
 
 
-Declarative markup using a dojo.store
+Declarative markup using a dojo/store
 -------------------------------------
 
 To set the default value for this example, specify the *value* attribute (the hidden text value to be submitted) in the markup.
@@ -123,7 +125,7 @@ To set the default value for this example, specify the *value* attribute (the hi
 
   .. js ::
 
-    require(["dojo/parser", "dijit/form/FilteringSelect", "dojo/store/Memory"]);
+    require(["dojo/parser", "dijit/form/FilteringSelect", "dojo/store/Memory", "dojo/domReady!"]);
 
   .. html ::
 
@@ -134,7 +136,7 @@ To set the default value for this example, specify the *value* attribute (the hi
         value="y"
         data-dojo-props="store:stateStore, searchAttr:'name'"
         name="state"
-        id="stateInput" />
+        id="stateInput">
 
 Custom displayed value/search text
 ----------------------------------
@@ -177,7 +179,8 @@ In this example, the FilteringSelect has been set to display the ids for states 
                 store: stateStore,
                 searchAttr: "id"
             }, "stateSelect");
-            filteringSelect.placeAt(win.body()).startup();
+            filteringSelect.placeAt(win.body());
+            filteringSelect.startup();
         });
 
 Codependent FilteringSelect/ComboBox widgets
@@ -481,10 +484,10 @@ and the state FilteringSelect filters the city ComboBox choices in this example.
     require([
         "dojo/store/Memory",
         "dijit/form/ComboBox", "dijit/form/FilteringSelect",
-        "dojo/domReady!"
-    ], function(Memory, ComboBox, FilteringSelect){
+        "dijit/registry", "dojo/domReady!"
+    ], function(Memory, ComboBox, FilteringSelect, registry){
 
-        new dijit.form.ComboBox({
+        var combobox = new ComboBox({
             id: "city",
             store: new Memory({ data: cities }),
             autoComplete: true,
@@ -494,27 +497,29 @@ and the state FilteringSelect filters the city ComboBox choices in this example.
             searchAttr: "name",
             onChange: function(city){
                 console.log("combobox onchange ", city, this.item);
-                dijit.byId('state').set('value', this.item ? this.item.state : null);
+                registry.byId('state').set('value', this.item ? this.item.state : null);
             }
-        }, "city").startup();
+        }, "city");
+        combobox.startup();
 
-        new dijit.form.FilteringSelect({
+        var fs = new FilteringSelect({
             id: "state",
             store: new Memory({ idProperty: "state", data: states }),
             autoComplete: true,
             style: "width: 150px;",
             onChange: function(state){
-                dijit.byId('city').query.state = this.item.state || /.*/;
+                registry.byId('city').query.state = this.item.state || /.*/;
             }
-        }, "state").startup();
+        }, "state");
+        fs.startup();
     });
 
   .. html ::
 
     <label for="city">City:</label>
-    <input id="city" />
+    <input id="city">
     <label for="state">State:</label>
-    <input id="state" />
+    <input id="state">
 
 Displaying rich text menu labels with labelAttr and labelType
 -------------------------------------------------------------
@@ -534,13 +539,12 @@ the autocompleted value in the textbox, as with other FilteringSelects, rather t
   .. js ::
 
     require([
-        "dojo/dom", "dojo/store/Memory", "dijit/form/FilteringSelect",
-        "dojo/domReady!"
-    ], function(dom, Memory, FilteringSelect){
+        "dojo/store/Memory", "dijit/form/FilteringSelect", "dojo/domReady!"
+    ], function(Memory, FilteringSelect){
         var dojoStore = new Memory({data: [
-            {id: 1, name:"we", label:"<i>we</i> <img src='http://placekitten.com/50/70' />"},
-            {id: 2, name:"are", label:"<u>are</u> <img src='http://placekitten.com/50/60' />"},
-            {id: 3, name:"kittens", label:"<b>kittens</b> <img src='http://placekitten.com/50/50' />"}
+            {id: 1, name:"we", label:"<i>we</i> <img src='http://placekitten.com/50/70'>"},
+            {id: 2, name:"are", label:"<u>are</u> <img src='http://placekitten.com/50/60'>"},
+            {id: 3, name:"kittens", label:"<b>kittens</b> <img src='http://placekitten.com/50/50'>"}
         ]});
 
        var fs = new FilteringSelect({
@@ -551,12 +555,13 @@ the autocompleted value in the textbox, as with other FilteringSelects, rather t
              name: "xyz",
              labelAttr: "label",
              labelType: "html"
-       }, dom.byId("dojoBox")).startup();
+       }, "dojoBox");
+       fs.startup();
     });
 
   .. html ::
 
-    <input id="dojoBox" />
+    <input id="dojoBox">
 
 
 
@@ -598,4 +603,4 @@ This appears to be an issue with IE 8 and list items (which are uses to implemen
 See Also
 ========
 
-* There's a :ref:`Select <dijit/form/Select>` widget in the :ref:`dijit.form <dijit/form>` project that's similar to FilteringSelect but without the search ability. It can support rich text in both the drop down and in a closed state (to display the selected item).
+* There's a :ref:`Select <dijit/form/Select>` widget in the :ref:`dijit/form <dijit/form>` project that's similar to FilteringSelect but without the search ability. It can support rich text in both the drop down and in a closed state (to display the selected item).

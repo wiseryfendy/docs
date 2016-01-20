@@ -54,17 +54,17 @@ Requring in the module is all that is needed:
 
 * :ref:`dojo/NodeList-data <dojo/NodeList-data>` - Allows the association of arbitrary data with items of a ``NodeList``.
 
-* :ref:`dojo/NodeList-dom <dojo/NodeList-dom>` - DOM related functions that are similiar functionality to the ``dojo/dom-*`` related modules.
+* :ref:`dojo/NodeList-dom <dojo/NodeList-dom>` - DOM related functions that are similar functionality to the ``dojo/dom-*`` related modules.
 
 * :ref:`dojo/NodeList-fx <dojo/NodeList-fx>` - Adds base and core FX support to ``NodeList``.
 
 * :ref:`dojo/NodeList-html <dojo/NodeList-html>` - Adds advanced content setting functionality.
 
-* :ref:`dojo/NodeList-manipulate <dojo/NodeList-manipulate>` - Functions that allow for manipulation of DOM nodes in similiar way to jQuery.
+* :ref:`dojo/NodeList-manipulate <dojo/NodeList-manipulate>` - Functions that allow for manipulation of DOM nodes in similar way to jQuery.
 
 * :ref:`dojo/NodeList-traverse <dojo/NodeList-traverse>` - Advanced node traversal functions.
 
-The first argument is the ``selector`` which is a CSS selector string that identifies the nodes that need to be retrieved.  The second argument is an optional ``context`` which limits the scope of the selector and only children of the will be considered.  This can either be a string representing the node ID or a DOM node.  For example:
+The first argument is the ``selector`` which is a CSS selector string that identifies the nodes that need to be retrieved.  The second argument is an optional ``context`` which limits the scope of the selector and only children of ``context`` will be considered.  This can either be a string representing the node ID or a DOM node.  For example:
 
 .. js ::
 
@@ -363,7 +363,7 @@ See Also
 * :ref:`dojo/NodeList-data <dojo/NodeList-data>` - Allows the association of arbitrary data with items of a 
   ``NodeList``.
 
-* :ref:`dojo/NodeList-dom <dojo/NodeList-dom>` - DOM related functions that are similiar functionality to the 
+* :ref:`dojo/NodeList-dom <dojo/NodeList-dom>` - DOM related functions that are similar functionality to the
   ``dojo/dom-*`` related modules.
 
 * :ref:`dojo/NodeList-fx <dojo/NodeList-fx>` - Adds base and core FX support to ``NodeList``.
@@ -371,7 +371,7 @@ See Also
 * :ref:`dojo/NodeList-html <dojo/NodeList-html>` - Adds advanced content setting functionality.
 
 * :ref:`dojo/NodeList-manipulate <dojo/NodeList-manipulate>` - Functions that allow for manipulation of DOM nodes in 
-  similiar way to jQuery.
+  similar way to jQuery.
 
 * :ref:`dojo/NodeList-traverse <dojo/NodeList-traverse>` - Advanced node traversal functions.
 

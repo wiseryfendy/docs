@@ -67,7 +67,7 @@ This example shows how you can set up the same select as the previous example, b
   .. js ::
 
     require(["dijit/form/Select", "dojo/_base/window", "dojo/domReady!"], function(Select, win){
-        new Select({
+        var select = new Select({
             name: "select2",
             options: [
                 { label: "TN", value: "Tennessee" },
@@ -76,7 +76,9 @@ This example shows how you can set up the same select as the previous example, b
                 { label: "FL", value: "Florida" },
                 { label: "CA", value: "California" }
             ]
-        }).placeAt(win.body()).startup();
+        });
+        select.placeAt(win.body());
+        select.startup();
     });
 
 A Select Fed By A Store
@@ -112,7 +114,7 @@ A Select can take its data from a data store, which must currently conform to th
     
       s.on("change", function(){
           console.log("my value: ", this.get("value"))
-      })
+      });
     })
   
   .. html ::
@@ -172,6 +174,19 @@ change when the user picks certain long options.
 
 The above example also demonstrates using type="separator" to get dividing lines between groups of options.
 
+Note also that there are some inconsistencies between setting inline styles vs. styles via CSS for this widget for its arrow icon. When setting an inline style, the Select changes the 'baseClass' from 'dijitSelect' to 'dijitSelectFixedWidth', which sets 'width:100%' on the '.dijitButtonContents'. So you may want to set style as follows (with the width being whatever value you want for the overall Select:
+
+.. css ::
+
+   .select {
+           width : 8.8em; 
+   }
+   
+   .select .dijitButtonContents {
+   	width: 100%;
+   }
+
+
 Setting Height
 --------------
 
@@ -215,3 +230,18 @@ letters can also be used to search.  Typing the 2 letters 'a' and 'b' within 1 s
 with 'ab'.  However, pausing between letters would result in searching for an option that begins with 'a', and then subsequently an option
 that begins with 'b'.  While usually not necessary, the pause timing can be controlled via the ``multiCharSearchDuration`` (integer)
 attribute which defaults to 1000 (milliseconds).
+
+Label
+-----
+To label a Select, rather than using the `<label>` tag you should use the `aria-labelledby` property, like:
+
+.. js ::
+
+   <span id="foo_label">My Select:</span>
+   <select id="foo" data-dojo-type="dijit/form/Select" aria-labelledby="foo_label">
+      ...
+   </select>
+
+Although `<label>` works with the JAWS screen reader, it doesn't work with iOS VoiceOver, and further,
+it violates the HTML spec which says that `<label>` should only be used with true form elements (whereas
+Select is implemented as a `<table>`).

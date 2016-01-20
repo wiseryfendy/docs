@@ -14,7 +14,7 @@ Usage
 
 .. js ::
 
-  require["dojo/rexexp"], function(regexp){
+  require["dojo/regexp"], function(regexp){
     // Escape regular expression strings
     var str = regexp.escapeString(someString);
 
@@ -24,10 +24,3 @@ Usage
     // Add a group match to an expression
     var str = regexp.group(someString);
   });
-
-.. api-doc :: dojo/regexp
-  :methods:
-  :summary:
-  :description:
-  :sig:
-  :returns:

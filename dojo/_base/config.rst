@@ -104,7 +104,7 @@ When creating a custom build it is possible to bake the dojoConfig object into t
 dojoConfig Parameters
 ---------------------
 
-So now that you know *how* to set global parameters for dojo using dojoConfig, you'd probably like to know *what* parameters are available for setting. For a quick reference, check out the `dojo.config API page <http://dojotoolkit.org/api/dojo/config>`_.
+So now that you know *how* to set global parameters for dojo using dojoConfig, you'd probably like to know *what* parameters are available for setting. For a quick reference, check out the `dojo.config API page <http://dojotoolkit.org/api/dojo/_base/config>`_.
 
 The parameters you specify in dojoConfig are meant to **override** the default settings and do several basic things:
 
@@ -128,6 +128,8 @@ debugContainerId: "yourContainerId"
 debugAtAllCosts: true (Dojo < 1.7 only)
   This setting forces the use of the xdomain loader to ensure all loaded modules have their own script tag. This gives you real line numbers in error messages and a complete list of script urls in most debugging tools. There is much more information here on `this tutorial on debugging with dojo <quickstart/debugging>`_. Note, this will break your application, if you pass a variable to dojo.require() instead of a string literal, and if you have code that relies on the synchronous loader i.e. not wrapped in dojo.ready/dojo.ready.
   Version 1.6 has issues with this setting; see http://bugs.dojotoolkit.org/ticket/12608 for more information.  It has been removed in 1.7; see the :ref:`release notes <releasenotes/1.7>`.
+
+.. _dojo/_base/config#locale:
 
 Language and Localization Settings in dojoConfig
 ------------------------------------------------

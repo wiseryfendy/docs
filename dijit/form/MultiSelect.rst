@@ -83,13 +83,15 @@ Programmatic example
             c.value = n++;
             sel.appendChild(c);
         }
-        var myMultiSelect = new MultiSelect({ name: 'dynamic' }, sel).startup();
+        var myMultiSelect = new MultiSelect({ name: 'dynamic' }, sel);
+        myMultiSelect.startup();
 
-        new Button({
+        var myButton = new Button({
             onClick: function(){
                 alert(myMultiSelect.get('value'));
             }
-        }, "progbutton").startup();
+        }, "progbutton");
+        myButton.startup();
     });
 
   .. html ::

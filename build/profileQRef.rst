@@ -79,7 +79,7 @@ copyTests
   all resources tagged as tests.
 
 mini
-  If truthy ignore all resources tagged as excludeMini; if copyTests is falsy or missing, also ignore all resources
+  If truthy ignore all resources tagged as miniExclude; if copyTests is falsy or missing, also ignore all resources
   tagged as tests.
 
 Transform: copy
@@ -296,12 +296,12 @@ Transform: writeDojo
 Transform: writeOptimized
 =========================
 
-:ref:`writeOptimize transform reference... <build/transforms/writeOptimize>`
+:ref:`writeOptimized transform reference... <build/transforms/writeOptimized>`
 
 ``layerOptimize`` (default = "shrinksafe")
   * [*falsy*] Layer modules are not optimized; the ``stripConsole`` profile property, if any, is ignored.
 
-  * ["comments.keeplines"] All comments are removed fromm all layer modules; new-lines are preserved; the ``stripConsole``
+  * ["comments.keeplines"] All comments are removed from all layer modules; new-lines are preserved; the ``stripConsole``
     profile property, if any, is ignored.
 
   * ["comments"] All comments are removed form all layer modules; new-lines are *not* preserved; the ``stripConsole``
@@ -323,7 +323,7 @@ Transform: writeOptimized
 ``optimize`` (default = "undefined")
   * [*falsy*] Non-layer modules are not optimized; the ``stripConsole`` profile property, if any, is ignored.
 
-  * ["comments.keeplines"] All comments are removed fromm all non-layer modules; new-lines are preserved; the ``stripConsole``
+  * ["comments.keeplines"] All comments are removed from all non-layer modules; new-lines are preserved; the ``stripConsole``
     profile property, if any, is ignored.
 
   * ["comments"] All comments are removed form all non-layer modules; new-lines are *not* preserved; the ``stripConsole``
